@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Todo Lists</string>
+    <string name="action_settings">Settings</string>
+    <string name="todo_date_pattern">MMM d, yyyy</string>
+</resources>
