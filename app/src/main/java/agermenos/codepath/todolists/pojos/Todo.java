@@ -7,10 +7,28 @@ import java.util.Date;
  */
 public class Todo {
     private int id;
+    private int listId;
     private String text;
     private Date creationDate;
     private String status;
-    private enum priority {LOW, MEDIUM, HIGH};
+    public enum Priority {
+        LOW ("low"), MEDIUM("medium"), HIGH("high");
+        private String strPriority;
+        Priority(String priority){
+            this.strPriority=priority;
+        }
+        public String getPriority(){return this.strPriority;}
+    }
+    private Priority priority;
+
+    public static Priority choosePriority(String priority){
+        switch (priority){
+            case "low":return Priority.LOW;
+            case "medium": return Priority.MEDIUM;
+            case "high": return Priority.HIGH;
+        }
+        return Priority.LOW;
+    }
 
     public int getId() {
         return id;
@@ -44,14 +62,32 @@ public class Todo {
         this.status = status;
     }
 
+    public int getListId() {
+        return listId;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public void setListId(int listId) {
+        this.listId = listId;
+    }
+
     public Todo() {
     }
 
-    public Todo(int id, String text, Date creationDate, String status) {
+    public Todo(int id, int listId, String text, Date creationDate, String status, Priority priority) {
         this.id = id;
         this.text = text;
+        this.listId=listId;
         this.creationDate = creationDate;
         this.status = status;
+        this.priority=priority;
     }
 
     @Override
@@ -62,9 +98,10 @@ public class Todo {
         Todo todo = (Todo) o;
 
         if (id != todo.id) return false;
-        if (!text.equals(todo.text)) return false;
-        if (creationDate != null ? !creationDate.equals(todo.creationDate) : todo.creationDate != null)
-            return false;
+        if (listId != todo.listId) return false;
+        if (text != null ? !text.equals(todo.text) : todo.text != null) return false;
+        if (!creationDate.equals(todo.creationDate)) return false;
+        if (!priority.equals(todo.priority)) return false;
         return status.equals(todo.status);
 
     }
@@ -72,9 +109,11 @@ public class Todo {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + text.hashCode();
-        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + listId;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + creationDate.hashCode();
         result = 31 * result + status.hashCode();
+        result = 31 * result + priority.hashCode();
         return result;
     }
 }

@@ -8,7 +8,7 @@ public class TodoTableInterface implements TableInterface {
     public static String COLUMNS[][] =
             {   {"ID","integer","PRIMARY KEY"},
                     {"LIST_ID", "integer",""},
-                            {"TEXT", "varchar",""},
+                    {"TEXT", "varchar",""},
                     {"CREATION_DATE", "date",""},
                     {"STATUS", "varchar",""},
                     {"PRIORITY", "varchar",""},
