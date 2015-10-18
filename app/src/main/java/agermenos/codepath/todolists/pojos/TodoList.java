@@ -4,11 +4,10 @@ package agermenos.codepath.todolists.pojos;
  * Created by Alejandro on 10/13/15.
  */
 public class TodoList {
-    private int id;
+    private long id;
     private String name;
 
-    public TodoList(int id, String name) {
-        this.id = id;
+    public TodoList(String name) {
         this.name = name;
     }
 
@@ -16,7 +15,7 @@ public class TodoList {
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -47,8 +46,8 @@ public class TodoList {
 
     @Override
     public int hashCode() {
-        int result = id;
+        long result = id;
         result = 31 * result + name.hashCode();
-        return result;
+        return (int)result;
     }
 }

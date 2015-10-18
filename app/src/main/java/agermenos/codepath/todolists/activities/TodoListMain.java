@@ -1,4 +1,4 @@
-package agermenos.codepath.todolists;
+package agermenos.codepath.todolists.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import agermenos.codepath.todolists.R;
 
 public class TodoListMain extends AppCompatActivity {
 

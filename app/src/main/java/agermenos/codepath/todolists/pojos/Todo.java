@@ -6,11 +6,13 @@ import java.util.Date;
  * Created by Alejandro on 10/11/2015.
  */
 public class Todo {
-    private int id;
-    private int listId;
+    private long id;
+    private long listId;
     private String text;
     private Date creationDate;
     private String status;
+    public final static String OPEN_STATUS="open";
+    public final static String CLOSED_STATUS="closed";
     public enum Priority {
         LOW ("low"), MEDIUM("medium"), HIGH("high");
         private String strPriority;
@@ -30,7 +32,7 @@ public class Todo {
         return Priority.LOW;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -62,7 +64,7 @@ public class Todo {
         this.status = status;
     }
 
-    public int getListId() {
+    public long getListId() {
         return listId;
     }
 
@@ -81,8 +83,7 @@ public class Todo {
     public Todo() {
     }
 
-    public Todo(int id, int listId, String text, Date creationDate, String status, Priority priority) {
-        this.id = id;
+    public Todo(long listId, String text, Date creationDate, String status, Priority priority) {
         this.text = text;
         this.listId=listId;
         this.creationDate = creationDate;
@@ -108,12 +109,12 @@ public class Todo {
 
     @Override
     public int hashCode() {
-        int result = id;
+        long result = id;
         result = 31 * result + listId;
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + creationDate.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + priority.hashCode();
-        return result;
+        return (int)result;
     }
 }
