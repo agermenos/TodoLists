@@ -1,13 +1,17 @@
 package agermenos.codepath.todolists.pojos;
 
+import java.util.Date;
+
 /**
  * Created by Alejandro on 10/13/15.
  */
 public class TodoList {
     private long id;
     private String name;
+    private Date creationDate;
 
     public TodoList(String name) {
+        this.creationDate = new Date();
         this.name = name;
     }
 
@@ -31,6 +35,14 @@ public class TodoList {
         this.name = name;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,14 +52,15 @@ public class TodoList {
 
         if (id != todoList.id) return false;
         if (!name.equals(todoList.name)) return false;
+        return creationDate.equals(todoList.creationDate);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        long result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
-        return (int)result;
+        result = 31 * result + creationDate.hashCode();
+        return result;
     }
 }

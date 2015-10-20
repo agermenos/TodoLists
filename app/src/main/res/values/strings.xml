@@ -2,4 +2,9 @@
     <string name="app_name">Todo Lists</string>
     <string name="action_settings">Settings</string>
     <string name="todo_date_pattern">MMM d, yyyy</string>
+    <string name="title_activity_todo_detail">TodoDetail</string>
+    <string name="title_activity_todo_list_form">TodoListForm</string>
+    <string name="edit_message">Todo Name:</string>
+    <string name="button_OK">Accept</string>
+    <string name="button_Cancel">Cancel</string>
 </resources>

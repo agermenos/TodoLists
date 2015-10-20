@@ -19,7 +19,7 @@ import agermenos.codepath.todolists.pojos.TodoList;
  */
 public class TodoListDbHelper extends SQLiteOpenHelper{
     public final static String DATABASE_NAME="TodoList";
-    public final static int DATABASE_VERSION=1;
+    public final static int DATABASE_VERSION=2;
     private static final String LOG = "TodoListDbHelper";
     BaseTable todoTbl=new TodoTable();
     BaseTable todoListTbl = new TodoListTable();
@@ -285,6 +285,7 @@ public class TodoListDbHelper extends SQLiteOpenHelper{
         TodoList tdl = new TodoList();
         tdl.setId(c.getInt(c.getColumnIndex(todoListTbl.getColumns(0, 0))));
         tdl.setName(c.getString(c.getColumnIndex(todoListTbl.getColumns(1, 0))));
+        tdl.setCreationDate(new Date(c.getLong(c.getColumnIndex(todoListTbl.getColumns(2,0)))));
         return tdl;
     }
 
@@ -303,6 +304,7 @@ public class TodoListDbHelper extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(todoListTbl.getColumns(0, 0), todoList.getId());
         values.put(todoListTbl.getColumns(1, 0), todoList.getName());
+        values.put(todoListTbl.getColumns(2, 0), todoList.getCreationDate().getTime());
         return values;
     }
 

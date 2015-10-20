@@ -7,7 +7,8 @@ public class TodoListTable extends BaseTable {
     public static final String COLUMNS[][] =
             {
                     {"ID","integer", "PRIMARY KEY"},
-                    {"TEXT", "varchar",""}
+                    {"TEXT", "varchar",""},
+                    {"CREATION_DATE", "long", ""}
             };
     public static final String NAME="TODO_LIST";
 
