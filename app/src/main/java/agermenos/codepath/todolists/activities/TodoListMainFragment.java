@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,13 @@ public class TodoListMainFragment extends Fragment {
 
         db = new TodoListDbHelper(this.getContext());
         List<TodoList> todoLists = db.getAllToDosList();
+        if(null==todoLists || todoLists.isEmpty()){
+            todoLists = new ArrayList<>();
+            TodoList tl = new TodoList("Testing new list");
+            long todoListId = db.createToDoList(tl);
+            tl.setId(todoListId);
+            todoLists.add(tl);
+        }
         if (todoListAdapter==null) {
             todoListAdapter = new TodoListAdapter(this.getContext(), todoLists);
         }
