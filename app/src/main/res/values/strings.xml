@@ -7,4 +7,8 @@
     <string name="edit_message">Todo Name:</string>
     <string name="button_OK">Accept</string>
     <string name="button_Cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_todolist_list">TodosSet</string>
+    <string name="title_todolist_detail">TodoList Detail</string>
 </resources>
