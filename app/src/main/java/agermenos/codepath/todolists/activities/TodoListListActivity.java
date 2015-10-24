@@ -2,6 +2,7 @@ package agermenos.codepath.todolists.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -28,7 +29,7 @@ import agermenos.codepath.todolists.R;
  * to listen for item selections.
  */
 public class TodoListListActivity extends AppCompatActivity
-        implements TodoListListFragment.Callbacks {
+        implements TodoListListFragment.Callbacks, TodoListDialogFragment.EditNameDialogListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -49,8 +50,11 @@ public class TodoListListActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /**
+                  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 .setAction("Action", null).show();
+                 */
+                showEditDialog();
             }
         });
 
@@ -69,6 +73,12 @@ public class TodoListListActivity extends AppCompatActivity
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
+    }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        TodoListDialogFragment editNameDialog = new TodoListDialogFragment();
+        editNameDialog.show(fm, "fragment_edit_todo");
     }
 
     /**
@@ -96,5 +106,10 @@ public class TodoListListActivity extends AppCompatActivity
             detailIntent.putExtra(TodoListDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
         }
+    }
+
+    @Override
+    public void onEdit(String text) {
+        System.out.println("LOGGING :" + text);
     }
 }
