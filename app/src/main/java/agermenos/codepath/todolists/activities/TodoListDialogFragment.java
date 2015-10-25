@@ -19,8 +19,9 @@ import agermenos.codepath.todolists.R;
  */
 public class TodoListDialogFragment extends DialogFragment implements TextView.OnEditorActionListener {
 
+    private Integer todoListId;
     public interface EditNameDialogListener {
-        public void onEdit(String text);
+        public void onEdit(Integer id, String text);
     }
 
     EditText mEditText;
@@ -54,7 +55,7 @@ public class TodoListDialogFragment extends DialogFragment implements TextView.O
             @Override
             public void onClick(View v) {
                 EditNameDialogListener activity = (EditNameDialogListener) getActivity();
-                activity.onEdit(mEditText.getText().toString());
+                activity.onEdit(getTodoListId(), mEditText.getText().toString());
                 getMe().dismiss();
             }
         });
@@ -74,10 +75,18 @@ public class TodoListDialogFragment extends DialogFragment implements TextView.O
         if (EditorInfo.IME_ACTION_DONE == actionId) {
             // Return input text to activity
             EditNameDialogListener activity = (EditNameDialogListener) getActivity();
-            activity.onEdit(mEditText.getText().toString());
+            activity.onEdit(getTodoListId(), mEditText.getText().toString());
             this.dismiss();
             return true;
         }
         return false;
+    }
+
+    public Integer getTodoListId() {
+        return todoListId;
+    }
+
+    public void setTodoListId(Integer todoListId) {
+        this.todoListId = todoListId;
     }
 }

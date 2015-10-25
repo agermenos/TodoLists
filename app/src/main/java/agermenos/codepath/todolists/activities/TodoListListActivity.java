@@ -8,9 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.ListView;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import agermenos.codepath.todolists.R;
+import agermenos.codepath.todolists.adapters.TodoListAdapter;
+import agermenos.codepath.todolists.pojos.TodoList;
+import agermenos.codepath.todolists.sql.TodoListDbHelper;
 
 /**
  * An activity representing a list of TodosSet. This activity
@@ -36,10 +43,13 @@ public class TodoListListActivity extends AppCompatActivity
      * device.
      */
     private boolean mTwoPane;
+    private int fragment_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_todolist_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,13 +81,12 @@ public class TodoListListActivity extends AppCompatActivity
                     .findFragmentById(R.id.todolist_list))
                     .setActivateOnItemClick(true);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     private void showEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
         TodoListDialogFragment editNameDialog = new TodoListDialogFragment();
+        editNameDialog.setTodoListId(null);
         editNameDialog.show(fm, "fragment_edit_todo");
     }
 
@@ -109,7 +118,10 @@ public class TodoListListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onEdit(String text) {
-        System.out.println("LOGGING :" + text);
+    public void onEdit(Integer id, String text) {
+        FragmentManager fm = getSupportFragmentManager();
+        ((TodoListListFragment)getSupportFragmentManager().
+                findFragmentById(R.id.todolist_list)).
+                onEditDialog(id, text);
     }
 }

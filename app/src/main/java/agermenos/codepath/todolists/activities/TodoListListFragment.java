@@ -5,10 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import agermenos.codepath.todolists.R;
 import agermenos.codepath.todolists.activities.dummy.DummyContent;
+import agermenos.codepath.todolists.adapters.TodoListAdapter;
+import agermenos.codepath.todolists.pojos.TodoList;
+import agermenos.codepath.todolists.sql.TodoListDbHelper;
 
 /**
  * A list fragment representing a list of TodosSet. This fragment
@@ -20,6 +27,9 @@ import agermenos.codepath.todolists.activities.dummy.DummyContent;
  * interface.
  */
 public class TodoListListFragment extends ListFragment {
+
+    TodoListDbHelper db;
+    TodoListAdapter todoListAdapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -70,13 +80,33 @@ public class TodoListListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setListAdapter(createTodoListAdapter());
+    }
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+    public void onEditDialog(Integer id, String text) {
+        TodoList tl = new TodoList(id, text);
+        if (null!=id) {
+            db.updateTodoList(tl);
+        }
+        else {
+            db.createToDoList(tl);
+        }
+    }
+
+    private ListAdapter createTodoListAdapter() {
+        db = new TodoListDbHelper(getContext());
+        List<TodoList> todoLists = db.getAllToDosList();
+        if(null==todoLists || todoLists.isEmpty()){
+            todoLists = new ArrayList<>();
+            TodoList tl = new TodoList("Testing new list");
+            int todoListId = db.createToDoList(tl);
+            tl.setId(todoListId);
+            todoLists.add(tl);
+        }
+        if (todoListAdapter==null) {
+            return new TodoListAdapter(getContext(), todoLists);
+        }
+        return null;
     }
 
     @Override
@@ -88,6 +118,7 @@ public class TodoListListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+
     }
 
     @Override

@@ -63,18 +63,18 @@ public class TodoListDbHelper extends SQLiteOpenHelper{
         ContentValues values = getValuesFromTodo(todo);
         // insert row
         long todo_id = db.insert(todoTbl.getName(), null, values);
-        return todo_id;
+        return new Integer((int) todo_id);
     }
 
     /**
      * Creating a todo_list
      */
-    public long createToDoList(TodoList todoList) {
+    public Integer createToDoList(TodoList todoList) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getValuesFromTodoList(todoList);
         // insert row
         long todo_id = db.insert(todoListTbl.getName(), null, values);
-        return todo_id;
+        return new Integer((int) todo_id);
     }
 
     public TodoList getTodoList(long todoListId) {

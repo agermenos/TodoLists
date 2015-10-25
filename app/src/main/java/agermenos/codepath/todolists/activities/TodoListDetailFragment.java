@@ -7,10 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import agermenos.codepath.todolists.R;
 import agermenos.codepath.todolists.activities.dummy.DummyContent;
+import agermenos.codepath.todolists.adapters.TodoListAdapter;
+import agermenos.codepath.todolists.pojos.TodoList;
+import agermenos.codepath.todolists.sql.TodoListDbHelper;
 
 /**
  * A fragment representing a single TodoList detail screen.
@@ -53,6 +60,8 @@ public class TodoListDetailFragment extends Fragment {
                 appBarLayout.setTitle(mItem.content);
             }
         }
+
+
     }
 
     @Override

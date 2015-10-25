@@ -6,9 +6,15 @@ import java.util.Date;
  * Created by Alejandro on 10/13/15.
  */
 public class TodoList {
-    private long id;
+    private Integer id;
     private String name;
     private Date creationDate;
+
+    public TodoList(Integer id, String name){
+        this.id=id;
+        this.creationDate = new Date();
+        this.name = name;
+    }
 
     public TodoList(String name) {
         this.creationDate = new Date();
@@ -19,11 +25,11 @@ public class TodoList {
 
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
